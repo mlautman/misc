@@ -1,0 +1,31 @@
+[global_config]
+  broadcast_default = off
+  enabled_plugins = InactivityWatch, ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  inactive_color_offset = 1.0
+  suppress_multiple_term_dialog = True
+[keybindings]
+  broadcast_group = None
+  broadcast_off = None
+  layout_launcher = None
+  next_profile = <Primary><Alt>0
+  previous_profile = <Primary><Alt>9
+  zoom_out = <Primary>minus
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#002b36"
+    cursor_color = "#ffffff"
+    font = Monospace 9
+    foreground_color = "#839496"
+    scrollback_lines = 50000
+  [[profile2]]
+    background_color = "#002b36"
+    foreground_color = "#839496"
