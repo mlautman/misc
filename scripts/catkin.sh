@@ -1,22 +1,5 @@
 #!/bin/bash -eu
 
-# Catkin
-function catbuild {
-  if catkin b; then
-    # playsuccess
-  else
-    # playfailure
-  fi
-}
-
-function catbuilddebug {
-  if catkin bd; then
-    # playsuccess
-  else
-    # playfailure
-  fi
-}
-
 alias catbuildrelease="catkin br"
 alias catclean="catkin clean"
 alias catcleanbuild="catclean && catbuild"

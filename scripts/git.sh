@@ -47,6 +47,15 @@ alias gitreadme='git commit README.md -m "Updated README" && git push'
 alias gitr='git remote -v'
 alias gitst='git status'
 
+alias gti='git'
+alias gtist='git status'
+alias gtica='git commit --amend'
+alias gtican='git commit --amend --no-edit'
+alias gtidiff='GIT_PAGER="" git diff --color-words'  # show the diff for unstaged files
+alias gtib='git branch'
+alias gtidiff='GIT_PAGER="" git diff --color-words'  # show the diff for unstaged files
+alias gtir='git remote -v'
+
 alias gitlogcompare="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative "
 alias gitlogcompare_hydro_indigo="gitlogcompare hydro-devel..indigo-devel"
 alias gitlogcompare_indigo_hydro="gitlogcompare indigo-devel..hydro-devel"

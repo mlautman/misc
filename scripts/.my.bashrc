@@ -129,8 +129,6 @@ fi
 
 # Reset Catkin stuff
 # make sure the ordering of the ROS sources do not get mixed up
-unset CMAKE_PREFIX_PATH
-unset ROS_PACKAGE_PATH
 
 # ccache, at front of source to enable compiling with ccache before other compilers
 if [[ -d /usr/lib/ccache ]]; then #Only will use if installed
@@ -141,7 +139,7 @@ function source_all()
 {
   pushd .
   source_all
-  cd ~/public_setup/scripts/
+  cd ~/misc/scripts/
   source source_all.sh
   popd
 }

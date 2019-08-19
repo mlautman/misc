@@ -1,10 +1,7 @@
-export SCRIPT_BASE_PATH=`pwd`
+export SCRIPT_BASE_PATH=$HOME/misc/
 
 # moving around filesystem
 source $SCRIPT_BASE_PATH/scripts/unix.sh
-
-# emacs customizations
-source $SCRIPT_BASE_PATH/scripts/emacs.sh
 
 # compressing files e.g. zip
 source $SCRIPT_BASE_PATH/scripts/compress.sh
@@ -15,17 +12,11 @@ source $SCRIPT_BASE_PATH/scripts/git.sh
 # helpers for searching through files
 source $SCRIPT_BASE_PATH/scripts/search.sh
 
-# Shortcuts for building stuff
-source $SCRIPT_BASE_PATH/scripts/build.sh
-
 # Shortcuts for quickly opening notes
 source $SCRIPT_BASE_PATH/scripts/aliases.sh
 
 # Formatting shortcuts
 source $SCRIPT_BASE_PATH/scripts/formatting.sh
-
-# Docker
-source $SCRIPT_BASE_PATH/scripts/docker.sh
 
 # Python
 # source $SCRIPT_BASE_PATH/scripts/python.sh
@@ -34,12 +25,7 @@ source $SCRIPT_BASE_PATH/scripts/docker.sh
 source $SCRIPT_BASE_PATH/scripts/fun.sh
 
 # Special aliases for using bitchin unix
-source $SCRIPT_BASE_PATH/scripts/bitchin.sh
-
-# Ubuntu only scrips
-if [[ $platform != 'osx' ]]; then
-    source $SCRIPT_BASE_PATH/scripts/ubuntu.sh
-fi
+# source $SCRIPT_BASE_PATH/scripts/bitchin.sh
 
 # ROS
 source $SCRIPT_BASE_PATH/scripts/ros.sh

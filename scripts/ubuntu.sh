@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-# Auto install script for public_setup
+# Auto install script for misc
 #
 # Please follow the Google Style Guide https://google.github.io/styleguide/shell.xml
 
@@ -50,7 +50,7 @@ setup_custom_keyboard_caps2esc()
   backup_keyboard_config
   this_session_reset_keyboard
   echo "Disabling capslock and replacing with escape"
-  sudo cp ~/public_setup/config/keyboard/keyboard_caps2esc /etc/default/keyboard
+  sudo cp ~/misc/config/keyboard/keyboard_caps2esc /etc/default/keyboard
   gsettings reset org.gnome.desktop.input-sources xkb-options
 
   # This session
@@ -66,7 +66,7 @@ setup_custom_keyboard_caps2esc_ctrlsuperswap()
   backup_keyboard_config
   this_session_reset_keyboard
   echo "Disabling capslock and replacing with escape, also swapping super and ctrl"
-  sudo cp ~/public_setup/config/keyboard/keyboard_caps2esc_ctrlSuperSwap /etc/default/keyboard
+  sudo cp ~/misc/config/keyboard/keyboard_caps2esc_ctrlSuperSwap /etc/default/keyboard
   gsettings reset org.gnome.desktop.input-sources xkb-options
 
   # This session
@@ -82,7 +82,7 @@ setup_custom_keyboard_caps2ctrl()
   backup_keyboard_config
   this_session_reset_keyboard
   echo "Disabling caps lock and replacing with Ctrl"
-  sudo cp ~/public_setup/config/keyboard/keyboard_caps2ctrl /etc/default/keyboard
+  sudo cp ~/misc/config/keyboard/keyboard_caps2ctrl /etc/default/keyboard
   gsettings reset org.gnome.desktop.input-sources xkb-options
 
   # This session
@@ -108,7 +108,7 @@ backup_keyboard_config()
 this_session_reset_keyboard()
 {
   # Turn off caps lock
-  python ~/config/keyboard/caps_lock_off.py
+  python ~/misc/config/keyboard/caps_lock_off.py
   # This session reset keyboard to no remaps
   setxkbmap -option
 }
@@ -216,10 +216,10 @@ terminator_install()
   mkdir ~/.config/terminator
   if [ "$1" = "1" ]; then
     echo "Setting terminator to white background"
-    ln -s $HOME/public_setup/config/terminator/config_white $HOME/.config/terminator/config
+    ln -s $HOME/misc/config/terminator/config_white $HOME/.config/terminator/config
   else
     echo "Setting terminator to black background"
-    ln -s $HOME/public_setup/config/terminator/config_dark $HOME/.config/terminator/config
+    ln -s $HOME/misc/config/terminator/config_dark $HOME/.config/terminator/config
   fi
   # make terminator default
   gsettings set org.gnome.desktop.default-applications.terminal exec 'terminator'
@@ -229,7 +229,7 @@ terminator_install()
 
   # set terminator to auto start
   mkdir -p ~/.config/autostart
-  cp ~/public_setup/install/ubuntu/autostart/terminator.desktop ~/.config/autostart/terminator.desktop
+  cp ~/misc/install/ubuntu/autostart/terminator.desktop ~/.config/autostart/terminator.desktop
 }
 
 ################################################################################
@@ -324,10 +324,10 @@ vim_install()
   sudo apt install -y vim-gnome || echo -e "\e[00;31mAPT-GET FAILED\e[00m"
 
   rm -rf ~/.vim ~/.vimrc
-  ln -s  ~/public_setup/config/.vim ~/
-  ln -s  ~/public_setup/config/.vim/.vimrc ~/.vimrc
+  ln -s  ~/misc/config/.vim ~/
+  ln -s  ~/misc/config/.vim/.vimrc ~/.vimrc
   # Vundle
-  rm -rf ~/public_setup/config/.vim/bundle/Vundle.vim
+  rm -rf ~/misc/config/.vim/bundle/Vundle.vim
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
 }
@@ -382,13 +382,13 @@ emacs_install()
   # created default folders (especially for .emacs.d, which contains auto file
   # backups)
   sudo rm -rf ~/emacs
-  ln -s ~/public_setup/config/emacs ~/emacs
+  ln -s ~/misc/config/emacs ~/emacs
   sudo rm -rf ~/.emacs.d
-  ln -s ~/public_setup/config/.emacs.d ~/.emacs.d
+  ln -s ~/misc/config/.emacs.d ~/.emacs.d
   sudo rm -rf ~/.emacs
-  ln -s ~/public_setup/config/emacs/.emacs ~/.emacs
+  ln -s ~/misc/config/emacs/.emacs ~/.emacs
 
-  # TODO: install yassnippet from source, because having it copied in public_setup would break it
+  # TODO: install yassnippet from source, because having it copied in misc would break it
   # when we upgraded emacs versions
   # TODO: use a fancier way for installing this emacs plugin, such as `package-install` or `el-get`
 }
@@ -419,7 +419,7 @@ function chrome_install {
   fi
   # set chrome to auto start
   mkdir -p ~/.config/autostart
-  cp ~/public_setup/install/ubuntu/autostart/google-chrome-dave.desktop ~/.config/autostart/google-chrome-dave.desktop
+  cp ~/misc/install/ubuntu/autostart/google-chrome-dave.desktop ~/.config/autostart/google-chrome-dave.desktop
 
   # GPI settings:
   # about:gpu
@@ -479,7 +479,7 @@ dropbox_install()
   #nautilus --quit
   # Make dropbox auto start
   #mkdir -p ~/.config/autostart
-  #cp ~/public_setup/install/ubuntu/autostart/dropbox.desktop ~/.config/autostart/dropbox.desktop
+  #cp ~/misc/install/ubuntu/autostart/dropbox.desktop ~/.config/autostart/dropbox.desktop
 
   # Start dropbox
   ~/.dropbox-dist/dropboxd &
@@ -512,7 +512,7 @@ flux_install()
   sudo apt install redshift redshift-gtk -y || echo -e "\e[00;31mAPT-GET FAILED\e[00m"
   # set redshift to auto start
   mkdir -p ~/.config/autostart
-  cp ~/public_setup/install/ubuntu/autostart/redshift.desktop ~/.config/autostart/redshift.desktop
+  cp ~/misc/install/ubuntu/autostart/redshift.desktop ~/.config/autostart/redshift.desktop
 
   # temp turn off redshift
   # pkill -USR1 redshift
@@ -540,7 +540,7 @@ common_media_install()
 
   # Gimp config (makes it look more like photoshop)
   rm -f ~/.gimp-2.8
-  ln -s ~/public_setup/config/.gimp-2.8/ ~/.gimp-2.8
+  ln -s ~/misc/config/.gimp-2.8/ ~/.gimp-2.8
 }
 
 ################################################################################
@@ -551,10 +551,7 @@ install_catkin_tools_config()
 {
   # setup catkin_tools config
   mkdir -p ~/.config/catkin/verb_aliases
-  ln -f -s ~/public_setup/config/catkin/01-custom-aliases.yaml ~/.config/catkin/verb_aliases/01-custom-aliases.yaml
-  if [ -f ~/public_setup/config/per-user/$BASHRC_NAME/02-personal.yaml ]; then
-    ln -f -s ~/public_setup/config/per-user/$BASHRC_NAME/02-personal.yaml ~/.config/catkin/verb_aliases/02-personal.yaml
-  fi
+  ln -f -s ~/misc/config/catkin/01-custom-aliases.yaml ~/.config/catkin/verb_aliases/01-custom-aliases.yaml
 }
 
 ################################################################################
@@ -755,7 +752,7 @@ r_install()
 
 ecryptfs_install()
 {
-  ~/public_setup/install/ubuntu/ecryptfs/ecryptfs_swap.sh
+  ~/misc/install/ubuntu/ecryptfs/ecryptfs_swap.sh
 }
 
 
@@ -893,7 +890,7 @@ github_setup()
 
   git config --global user.name "$GITHUB_NAME"
   git config --global user.email "$GITHUB_EMAIL"
-  git config --global include.path "/home/$USER/public_setup/config/.gitconfig"
+  git config --global include.path "/home/$USER/misc/config/.gitconfig"
   git config --global alias.co checkout
   git config --global alias.br branch
   git config --global alias.ci commit
@@ -941,71 +938,6 @@ EOF
   read -p "Now add to github"
 
   echo "Done with setup, now run verb_control_install_1"
-  popd
-}
-
-################################################################################
-# Installs Software to use with Verb
-################################################################################
-
-verb_control_install_1()
-{
-  # Install software
-  sudo apt update
-  sudo apt -y dist-upgrade
-  sudo apt -y install \
-       repo git g++ gcc-arm-none-eabi \
-       pkg-config zip zlib1g-dev unzip openjdk-8-jdk \
-       make \
-       mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev \
-       libxcb-icccm4-dev libxcb-image0-dev \
-       libxcb-keysyms1-dev libxcb-xinerama0-dev \
-       libpcre16-3 \
-       libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
-       libxcursor-dev libxi-dev \
-       libxrandr2 libxrandr-dev xterm \
-       xvfb \
-       iptables \
-       debootstrap libguestfs-tools squashfs-tools \
-       python-dev \
-       python-netifaces \
-       libc6-dev-i386 lib32z1 \
-       clang-3.9 clang-tidy-3.9 \
-       clang-format-3.9
-
-  # Configure software
-  sudo locale-gen "en_US.UTF-8"
-
-  # Grant real-time privileges to the adm group. Create /etc/security/limits.d/rtprio_adm.conf:
-  google-chrome "https://gerrit.verbsurgicaleng.com/g/plugins/gitiles/docs/+/master/users/setup/system_software/00-workstation.md"
-  se /etc/security/limits.d/rtprio_adm.conf
-  read -p "Add in rtprio limits. Ready to logout?" $dummy
-
-  echo "Logging you out now to setup RTPRIO limits"
-  gnome-session-quit
-}
-
-################################################################################
-# Second half of verb setup
-################################################################################
-
-verb_control_install_2() # second half of the verb setup, after logging out
-{
-  pushd .
-  grep ^adm /etc/group
-  ulimit -r
-  read -p "Are the limits 100?" $dummy
-
-  mkdir $HOME/verb
-  cd $HOME/verb
-  repo init -u ssh://gerrit.verbsurgicaleng.com:29418/manifest
-  repo sync
-
-  source $HOME/verb/build/envsetup.sh
-  bazel
-
-  cd ~/verb/verb/executables/system/simulator
-  source s2_build_robot_sim.sh
   popd
 }
 
@@ -1150,13 +1082,13 @@ function workraveinstall()
   sudo apt-get install -y workrave || echo -e "\e[00;31mAPT-GET FAILED\e[00m"
 
   # Add workrave configuration
-  ln -s ~/public_setup/config/.workrave/workrave.ini ~/.workrave/workrave.ini
+  ln -s ~/misc/config/.workrave/workrave.ini ~/.workrave/workrave.ini
 
   # set workrave to auto start
   # TODO: delete autostart file
   # REMOVED(dave) - I think this was causing a duplicate start "Is Workrave already running?"
   #mkdir -p ~/.config/autostart
-  #cp ~/public_setup/install/ubuntu/autostart/workrave.desktop ~/.config/autostart/workrave.desktop
+  #cp ~/misc/install/ubuntu/autostart/workrave.desktop ~/.config/autostart/workrave.desktop
 }
 
 ################################################################################
@@ -1192,342 +1124,3 @@ check_env_variables_set()
   fi
 }
 
-################################################################################
-# Main prompts for installing Ubuntu computer
-################################################################################
-
-install_normal_ubuntu()
-{
-    UBUNTU_VERSION=`lsb_release --codename | cut -f2`
-
-    # Upgrade all packages first using alias apt-get dist-upgrade
-    sudo apt -y dist-upgrade
-
-    # Install low-level core stuff ---------------------------
-
-    if [ "$INSTALL_CORE_TERMINAL_UTILS" = "1" ]; then
-      core_install
-    fi
-    if [ "$INSTALL_TERMINATOR" = "1" ]; then
-      terminator_install $TERMINAL_WHITE_BACKGROUND
-    fi
-    picknik_security_setup
-    if [ "$INSTALL_PYTHON2_TOOLS" = "1" ]; then
-      python_install
-    fi
-    if [ "$INSTALL_PYTHON3_TOOLS" = "1" ]; then
-      python3_install
-    fi
-
-    # Text editors -------------------------------------------
-
-    if [ "$INSTALL_EMACS" = "1" ]; then
-      emacs_install
-    fi
-    if [ "$INSTALL_SUBLIME" = "1" ]; then
-      sublime_install
-    fi
-    if [ "$INSTALL_VIM" = "1" ]; then
-      vim_install
-    fi
-    if [ "$INSTALL_QT" = "1" ]; then
-      qtcreator_install
-    fi
-
-    # Distribution specific installs #########################
-
-    # Keyboard setup
-    if [ "$CUSTOM_KEYBOARD_SETUP" = "0" ]; then
-      setup_default_keyboard
-    elif [ "$CUSTOM_KEYBOARD_SETUP" = "1" ]; then
-      setup_custom_keyboard_caps2ctrl
-    elif [ "$CUSTOM_KEYBOARD_SETUP" = "2" ]; then
-      setup_custom_keyboard_caps2esc
-    elif [ "$CUSTOM_KEYBOARD_SETUP" = "3" ]; then
-      setup_custom_keyboard_caps2esc_ctrlsuperswap
-    fi
-
-    # Ubuntu 16.04 --------------------------------------------
-    if [ "$UBUNTU_VERSION" = "xenial" ]; then
-
-      if [ "$INSTALL_UBUNTU_TOOLS" = "1" ]; then
-        ubuntu_16_install
-      fi
-
-      if [ "$INSTALL_GNOME" = "1" ]; then
-        gnome3_install
-      fi
-
-    # Ubuntu 18.04 --------------------------------------------
-    elif [ "$UBUNTU_VERSION" = "bionic" ]; then
-
-      if [ "$INSTALL_UBUNTU_TOOLS" = "1" ]; then
-        ubuntu_18_install
-      fi
-    fi
-
-    # Web Apps -------------------------------------
-    if [ "$INSTALL_GOOGLE_CHROME" = "1" ]; then
-      chrome_install
-    fi
-    if [ "$INSTALL_SLACK" = "1" ]; then
-      slack_install
-    fi
-
-    if [ "$INSTALL_DROPBOX" = "1" ]; then
-      dropbox_install
-    fi
-    if [ "$INSTALL_SPOTIFY" = "1" ]; then
-      spotify_install
-    fi
-    if [ "$INSTALL_MEDIA_APPS" = "1" ]; then
-      common_media_install
-    fi
-
-    # Github things ---------------------------------
-    if [ "$SETUP_SSH_KEY" = "1" ]; then
-      setup_ssh_keys
-    fi
-    if [ "$SETUP_GITHUB" = "1" ]; then
-      github_setup
-    fi
-    if [ "$INSTALL_GITLFS_GIT_HUB" = "1" ]; then
-      hub_setup
-    fi
-
-    # ROS and Gazebo  --------------------------------------------
-    if [ "$UBUNTU_VERSION" = "xenial" ]; then # 16.04
-
-      if [ "$INSTALL_ROS1" = "1" ]; then
-        install_ros_kinetic
-      fi
-
-      if [ "$INSTALL_GAZEBO" = "1" ]; then
-        gazebo_install
-      fi
-
-      if [ "$INSTALL_ROS_BLOOM" = "1" ]; then
-        install_ros_github_token
-      fi
-    elif [ "$UBUNTU_VERSION" = "bionic" ]; then # 18.04
-      if [ "$INSTALL_ROS2" = "1" ]; then
-        install_ros2_crystal
-      fi
-    fi
-
-    # Other stuff ----------------------------------------
-    if [ "$INSTALL_VIRTUALBOX" = "1" ]; then
-      virtualbox_install
-    fi
-    if [ "$INSTALL_LATEX" = "1" ]; then
-      latex_install
-    fi
-    if [ "$INSTALL_TRUECRYPT" = "1" ]; then
-      true_crypt_install
-    fi
-    if [ "$INSTALL_MATLAB" = "1" ]; then
-      matlab_install
-    fi
-    if [ "$INSTALL_BENCHMARKING" = "1" ]; then
-      benchmark_install
-    fi
-    if [ "$INSTALL_FLUX" = "1" ]; then
-      flux_install
-    fi
-    if [ "$INSTALL_DOCKER" = "1" ]; then
-      docker_install
-    fi
-    if [ "$INSTALL_CCACHE" = "1" ]; then
-      ccache_install
-    fi
-
-    # Cleanup unused packages ----------------------
-    sudo apt autoremove -y
-
-    # Upgrade
-    sudo apt dist-upgrade -y
-
-    # ?
-    sudo apt clean
-
-    # TODO(tyler): cleanup duplicate PPAs
-}
-
-################################################################################
-# Choose what config file to use for installation
-################################################################################
-
-load_install_configuration()
-{
-  # If this is the first time we are running this we store the config in a temporary
-  # location.  Otherwise, we set it to the config in the per-user directory.
-  INSTALL_CONFIG_FILE=$HOME/public_setup/config/per-user/$BASHRC_NAME/ubuntu_install_config
-  if [ -z "$BASHRC_NAME" ] || [ ! -f $HOME/public_setup/config/per-user/$BASHRC_NAME/ubuntu_install_config ]; then
-    echo ""
-    echo "It appears this is your first install. Do you already have a user config for public_setup?"
-    read -p "If so, please enter username now. Otherwise leave blank. Username: " BASHRC_NAME
-
-    # TODO(davetcoleman): better error handling here
-    echo "Creating default config file"
-
-    # this is the first time we are running this
-    if [ ! -d "$HOME/public_setup/config/per-user/$BASHRC_NAME" ]; then
-      mkdir -p $HOME/public_setup/config/per-user/$BASHRC_NAME
-    fi
-    INSTALL_CONFIG_FILE=$HOME/public_setup/config/per-user/$BASHRC_NAME/ubuntu_install_config
-    cp $HOME/public_setup/install/ubuntu/install_config $INSTALL_CONFIG_FILE
-  fi
-
-  echo ""
-  echo "Using config: $INSTALL_CONFIG_FILE"
-  read -p "Please adjust your installation configuration file, save, and close. Press any key to open config and continue."
-
-  if [ -z ${EDITOR+x} ]; then
-    # Will probably choose nano if nothing else has been installed.
-    # Can be changed with:
-    # $ sudo update-alternatives --config editor
-    echo "Using default editor"
-    editor $INSTALL_CONFIG_FILE
-  else
-    echo "Using user-specified editor"
-    $EDITOR $INSTALL_CONFIG_FILE
-  fi
-
-  source $INSTALL_CONFIG_FILE
-}
-
-################################################################################
-# High level installation function
-################################################################################
-
-main()
-{
-  set -x          # activate debugging from here
-  unalias -a git  # git is an alias for hub in my config
-
-  # Ensure environment variables are set otherwise strict bash script will fail
-  check_env_variables_set
-
-  # Choose what config file to use for installation
-  load_install_configuration
-
-  if [ "$BASHRC_COMPUTER_NAME" == "" ]; then
-    BASHRC_COMPUTER_NAME=$BASHRC_ENV
-  fi
-
-  if [ "$BASHRC_USER_NAME" == "" ]; then
-    BASHRC_USER_NAME=$BASHRC_NAME
-  fi
-
-  # Create new bashrc
-  rm -f ~/.bashrc
-  echo "export BASHRC_ENV=$BASHRC_COMPUTER_NAME && export BASHRC_NAME=$BASHRC_USER_NAME && . ~/public_setup/.my.bashrc" > ~/.bashrc
-
-  # Source the bashrc for the first time
-  set +u  # turn off strict mode because of PS1 test
-  source ~/.bashrc
-  set -u  # turn back on strict mode
-
-  # -------------------------------------------------
-  #  minimum command line control - mostly for Docker
-  # ------------------------------------------------
-  if [ "$INSTALL_TYPE" = "2" ]; then
-
-    install_min_command_line
-
-    # -------------------------------------------------
-    # cloud remote host for running Docker images
-    # -------------------------------------------------
-  elif [ "$INSTALL_TYPE" = "3" ]; then
-
-    install_min_command_line
-
-    # install docker
-    docker_install
-
-    # -------------------------------------------------
-    # normal ubuntu
-    # -------------------------------------------------
-  elif [ "$INSTALL_TYPE" = "1" ]; then
-
-    install_normal_ubuntu
-
-  else
-    echo "Unknown response"
-    return
-  fi
-
-  set +x          # stop debugging from here
-
-  # Rerun config for new terminal
-  set +u  # turn off strict mode because of PS1 test
-  source ~/.bashrc
-  set -u  # turn back on strict mode
-
-  # Fix the public_setup repo to use ssh
-  pushd .
-  cd ~/public_setup
-  source scripts/git.sh
-  git_https_to_ssh
-  popd
-
-cat << "EOF"
-
-# -----------------------------
-# You now have BITCHIN UNIX!
-# -----------------------------
-#  _______             _______
-# |@|@|@|@|           |@|@|@|@|
-# |@|@|@|@|   _____   |@|@|@|@|
-# |@|@|@|@| /\_T_T_/\ |@|@|@|@|
-# |@|@|@|@||/\ T T /\||@|@|@|@|
-#  ~/T~~T~||~\/~T~\/~||~T~~T\~
-#   \|__|_| \(-(O)-)/ |_|__|/
-#   _| _|    \\8_8//    |_ |_
-# |(@)]   /~~[_____]~~\   [(@)|
-#   ~    (  |       |  )    ~
-#       [~` ]       [ '~]
-#       |~~|         |~~|
-#       |  |         |  |
-#      _<\/>_       _<\/>_
-#     /_====_\     /_====_\
-
-You're up and running!
-
-EOF
-
-
-  if [ "$LOGOUT_AFTER_INSTALL" = "1" ]; then
-    echo "Logging you out now to finish Docker setup"
-    gnome-session-quit
-  fi
-}
-
-# Pretty
-cat << "EOF"
-# -----------------------------
-# Welcome to the BITCHIN UNIX!
-# -----------------------------
-#  _______             _______
-# |@|@|@|@|           |@|@|@|@|
-# |@|@|@|@|   _____   |@|@|@|@|
-# |@|@|@|@| /\_T_T_/\ |@|@|@|@|
-# |@|@|@|@||/\ T T /\||@|@|@|@|
-#  ~/T~~T~||~\/~T~\/~||~T~~T\~
-#   \|__|_| \(-(O)-)/ |_|__|/
-#   _| _|    \\8_8//    |_ |_
-# |(@)]   /~~[_____]~~\   [(@)|
-#   ~    (  |       |  )    ~
-#       [~` ]       [ '~]
-#       |~~|         |~~|
-#       |  |         |  |
-#      _<\/>_       _<\/>_
-#     /_====_\     /_====_\
-
-An internal tool of PICKNIK Robotics.
-
-EOF
-read -p "Press any key to setup settings for Ubuntu '$UBUNTU_VERSION', or CTRL-C to cancel"
-
-# Run
-main
