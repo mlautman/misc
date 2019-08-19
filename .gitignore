@@ -1,0 +1,29 @@
+.bashrc
+.emacs.d/backups/
+.emacs.d/%backup%~
+.emacs.d/auto-save-list/
+.emacs.d/autosaves/
+*~
+
+# Compiled code
+.elc
+
+# Emacs
+.emacs.d/projectile-bookmarks.eld
+.emacs.d/projectile.cache
+
+*.gitconfig
+
+# Vim and Mike
+*.gitconfig_mike
+*.swp
+config/.vim/.netrwhist
+config/.vim/bundle/*
+config/.vim/plugged/*
+config/.vim/undo-dir/*
+
+# Other settings
+config/.gimp-2.8/*
+
+# The verb code base overwrites this file
+config/terminator/config
